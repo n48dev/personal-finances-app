@@ -1,3 +1,8 @@
+<!-- This file is part of Anthony's Personal Finances App.
+Copyright © 2024 - Anthony Buitrago
+
+This blog is licensed under the GNU General Public License v3.0.
+See the LICENSE file in the root of this project for details. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,35 +21,36 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
-    <div id="container">
-        <section id="recurringPaymentsList">
-            <fieldset>
-                <legend>Recurring payments</legend>
+    <main>
+        <div id="container">
+            <section id="recurringPaymentsList">
+                <fieldset>
+                    <legend>Recurring payments</legend>
 
-                <div id="recurringPaymentsInfo"></div>
-            </fieldset>
-        </section>
+                    <div id="recurringPaymentsInfo"></div>
+                </fieldset>
+            </section>
 
-        <form id="creditCardPurchaseCalculator">
-            <fieldset>
-                <legend>Credit card purchase calculator</legend>
-                
-                <label for="amount">Purchase amount*</label>
-                <input id="amount" type="number" placeholder="e.g., 2360000" required>
-                
-                <label for="numInstallments">Number of installments*</label>
-                <input id="numInstallments" type="number" placeholder="e.g., 6" required>
-                
-                <label for="annualInterestRatePercent">Annual interest rate (E.A.)</label>
-                <input id="annualInterestRatePercent" type="number" placeholder="Default: 49.07" step="0.01">
-                
-                <button type="submit">Submit</button>
-                
-                <div id="creditCardPurchaseResult"></div>
-            </fieldset>
-        </form>
-    </div>
-
+            <form id="creditCardPurchaseCalculator">
+                <fieldset>
+                    <legend>Credit card purchase calculator</legend>
+                    
+                    <label for="amount">Purchase amount*</label>
+                    <input id="amount" type="number" placeholder="e.g., 2360000" required>
+                    
+                    <label for="numInstallments">Number of installments*</label>
+                    <input id="numInstallments" type="number" placeholder="e.g., 6" required>
+                    
+                    <label for="annualInterestRatePercent">Annual interest rate (E.A.)</label>
+                    <input id="annualInterestRatePercent" type="number" placeholder="Default: 27.90" step="0.01">
+                    
+                    <button type="submit">Submit</button>
+                    
+                    <div id="creditCardPurchaseResult"></div>
+                </fieldset>
+            </form>
+        </div>
+    </main>
     <script src="scripts/main.js"></script>
     <script src="scripts/sampleData.js"></script>
     <script src="scripts/privateData.js"></script>

@@ -1,9 +1,14 @@
+/* This file is part of Anthony's Personal Finances App.
+Copyright © 2024 - Anthony Buitrago
+
+This blog is licensed under the GNU General Public License v3.0.
+See the LICENSE file in the root of this project for details. */
 document.getElementById("creditCardPurchaseCalculator").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const amount = parseFloat(document.getElementById("amount").value);
     const numInstallments = parseInt(document.getElementById("numInstallments").value);
-    const annualInterestRatePercent = parseFloat(document.getElementById("annualInterestRatePercent").value) || 49.07;
+    const annualInterestRatePercent = parseFloat(document.getElementById("annualInterestRatePercent").value) || 27.90;
 
     creditCardPurchaseCalculator(amount, numInstallments, annualInterestRatePercent);
 });
