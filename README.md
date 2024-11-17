@@ -103,7 +103,7 @@ For the full license text, please refer to the [LICENSE.md](LICENSE.md) file inc
 
 If you have any questions, suggestions, or just want to get in touch with me, you can do so through:
 
-- **Email**: n48dev@gmail.com
+- **Email**: contact@n48.dev
 - **LinkedIn**: [in/n48dev](https://www.linkedin.com/in/n48dev/)
 
 ## Acknowledgements

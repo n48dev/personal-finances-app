@@ -1,2 +1,5 @@
 .DS_Store
-scripts/privateData.js
+assets/scripts/privateData.js
+node_modules
+.env
+.vercel
