@@ -25,6 +25,8 @@ body {
 #container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "recurringPaymentsList creditCardPurchaseCalculator";
     gap: 24px;
     margin: auto;
     max-width: 1920px;
@@ -54,13 +56,26 @@ fieldset > legend {
     box-shadow: 0 0 6px var(--shadow--color);
 }
 
-#recurrinPaymentsList > fieldset {
+#recurringPaymentsList {
+    grid-area: recurringPaymentsList;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    gap: 12px;
 }
 
-#recurringPaymentsList > fieldset > div > h3 {
+#exchangeRates > p {
+    font-size: 1rem;
+    text-align: center;
+    padding: 16px 0;
+    padding-left: 12px;
+    margin: 0;
+}
+
+#exchangeRates > p > span{
+    font-weight: bold;
+}
+
+#recurringPaymentsInfo > h3 {
     font-size: 0.95rem;
     font-weight: normal;
     text-align: center;
@@ -68,7 +83,7 @@ fieldset > legend {
     margin: 8px 0 2px;
 }
 
-#recurringPaymentsList > fieldset > div > p {
+#recurringPaymentsInfo > p {
     font-size: 0.9rem;
     padding: 2px;
     padding-left: 12px;
@@ -76,12 +91,15 @@ fieldset > legend {
     background-color: var(--secondary-semitransparent);
 }
 
-#recurringPaymentsList > fieldset > div > p:nth-child(odd) {
+#recurringPaymentsInfo > p:nth-child(odd) {
     background-color: var(--primary-semitransparent);
 }
 
-#creditCardPurchaseCalculator > fieldset {
+#creditCardPurchaseCalculator {
     grid-area: creditCardPurchaseCalculator;
+}
+
+#creditCardPurchaseCalculator > fieldset {
     display: flex;
     flex-direction: column;
     align-items: stretch;
