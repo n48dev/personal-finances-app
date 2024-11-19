@@ -1,78 +1,141 @@
 # Anthony's Personal Finance App
 
-This is a simple web application designed to help manage **personal finances**. The app currently provides functionality for tracking expenses and calculating credit card installment payments.
+This is a comprehensive web application designed to help manage my **personal finances**. The app provides real-time exchange rate conversion, expense tracking, and tools for calculating credit card installment payments. It leverages serverless technologies to deliver a responsive and efficient user experience.
 
 ## Main features
 
-- 📊 **Expense management**: Displays a table with total expenses, including subscriptions, and converts amounts into Colombian Pesos (COP) based on the conversion rates set in `sampleData.js`.
-- 🧮 **Installment and interest calculator**: Allows users to calculate the total cost of a credit card purchase, showing the monthly interest, total interest paid, installment amount, and final payment. Users can input the purchase amount, number of installments, and optionally, an effective annual interest rate (E.A.). If no rate is provided, a default rate is used as indicated in the input placeholder.
+- 💰 **Real-time Exchange Rate**: Fetches and displays the current USD to COP exchange rate using an external API. The exchange rate is cached to optimize performance and reduce API calls.
+- 📊 **Expense Management**: Calculates and displays total expenses, including subscriptions, utilities, rent, and other recurring payments. The amounts are automatically converted into Colombian Pesos (COP) based on the latest exchange rate.
+- 🧮 **Installment and Interest Calculator**: Provides a tool for users to calculate the total cost of a credit card purchase. It shows the monthly interest rate, total interest paid, installment amount, and final payment. Users can input the purchase amount, number of installments, and optionally, an effective annual interest rate (E.A.). If no rate is provided, a default rate is used as indicated in the input placeholder.
+- 🌐 **Seamless Integration**: The frontend hosted on GitHub Pages interacts with the backend API deployed on Vercel, ensuring a smooth and responsive user experience.
+- 📦 **Efficient Caching**: Utilizes Redis via Upstash to cache the exchange rate for 24 hours, reducing redundant API calls and improving response times.
 
 ## Technologies used
 
 This app is built using the following technologies:
 
-- **HTML5**: For the structure of the page.
-- **CSS3**: For design and style, including adaptability to different devices through responsive design techniques.
-- **JavaScript**: For polyfills and functionalities.
+- **HTML5**: For structuring the content of the page.
+- **CSS3**: For design, layout, and responsiveness to adapt to different devices.
+- **JavaScript**: For frontend functionalities, event handling, and interacting with the API.
+- **Node.js**: For setting up the backend server to handle API requests.
+    - **Express.js**: For creating and managing the server and API routes.
+    - **Axios**: For making HTTP requests to external APIs.
+    - **dotenv**: For securely managing environment variables.
+- **Redis (via ioredis and @upstash/redis)**: For caching the exchange rate to reduce API calls and improve performance using a serverless Redis database.
+- **Vercel**: For deploying the backend API and managing serverless functions.
+- **GitHub Pages**: For hosting the frontend of the application.
 
 ## Project structure
 
 ```
 personalFinancesApp/
-├── scripts/
-│   ├── main.js
-│   └── sampleData.js
-├── styles/
-│   └── main.css
+├── api/
+│   ├── getDollarRate.js
+│   └── server.js
+├── assets/
+│   ├── scripts/
+│   │   └── main.js
+│   └── styles/
+│       └── main.css
+├── .env.example
 ├── .gitignore
+├── index.html
 ├── LICENSE.md
+├── package-lock.json
+├── package.json
 ├── README.md
-└── index.html
+└── vercel.json
 ```
 
 ## Explanation
 
-- **scripts/main.js**: Contains the main logic for the application, including event listeners, calculations for credit card purchases, and updating the displayed data.
-- **scripts/sampleData.js**: Stores sample data for recurring payments, subscription costs, and exchange rates used for converting amounts into COP.
-- **styles/main.css**: Defines the layout, color schemes, and responsiveness of the app.
-- **index.html**: The entry point of the application, including sections for displaying recurring payments and the credit card calculator form.
-- **LICENSE.md**: The GNU General Public License v3.0 for the project.
-- **README.md**: Documentation file with details on features, installation, and usage.
-- **.gitignore**: Ensures unnecessary files (like temporary or private files) are not tracked by Git.
+- **api/getDollarRate.js**: Contains logic to fetch the current USD to COP exchange rate from CurrencyFreaks and caches it in Redis to optimize performance and reduce API usage.
+- **api/server.js**: Sets up an Express server with a `/api/dollar-rate` endpoint, configured with CORS to allow access from GitHub Pages, and serves the exchange rate data.
+- **assets/scripts/main.js**: Manages the frontend logic, fetching the exchange rate from the Vercel API, handling event listeners for the credit card calculator, and updating displayed data.
+- **assets/styles/main.css**: Defines the visual layout, color scheme, and responsive design for the application to ensure it looks good on different devices.
+- **index.html**: The main entry point of the application, containing sections for displaying exchange rates, recurring payments, and a form for credit card payment calculations.
+- **.env.example**: Provides sample environment variables for sensitive information like API keys and Redis credentials, ensuring they remain secure and out of version control.
+- **.gitignore**: Specifies files and directories to exclude from version control, such as `node_modules`, environment files, and temporary system files.
+- **LICENSE.md**: Includes the GNU General Public License v3.0, which allows others to use, modify, and distribute the software under the same terms.
+- **README.md**: Documentation detailing the project's features, setup instructions, and usage guidelines for users and contributors.
+- **package-lock.json** & **package.json**: Handle project dependencies, scripts, and metadata for managing the Node.js environment and running the application.
+- **vercel.json**: Configures Vercel deployment, specifying routes to direct API requests to the Express server, ensuring the backend works seamlessly with the frontend.
 
 ## Installation
 
-If you want to clone this app and run it locally on your machine, follow these steps:
+### 1. Clone the repository
 
-1. Clone this repository:
+First, clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/n48dev/personalFinancesApp.git
+cd personalFinancesApp
 ```
 
-2. Start a simple local server. Use either the "Live Server" extension in VS Code or `http-server` to start a local server.
+### 2. Install dependencies
 
-- **With VS Code's "Live Server"**:
-
-If you're using VS Code, you can install the "Live Server" extension and simply click "Go Live" from the status bar to start the server.
-
-- **With `http-server`**:
-
-If you have Node.js installed, you can use the following command to install it globally:
+Once inside the project directory, run the following command to install all necessary dependencies:
 
 ```bash
-npm install -g http-server
+npm install
 ```
 
-Then, start the server in the project directory with:
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory based on the `.env.example` file:
 
 ```bash
-http-server -p 8000
+CURRENCYFREAKS_APIKEY=your_api_key_here
+REDIS_HOST=your_redis_host
+REDIS_PORT=your_redis_port
+REDIS_PASSWORD=your_redis_password
 ```
 
-3. Open the local server in your browser by going to:
+*Make sure to fill in these values with the correct credentials before running the server.*
 
-`localhost:8000/`
+### 4. Update server.js for CORS
+
+To ensure your GitHub Pages site can access your Vercel API, update the allowed origins in `api/server.js`:
+
+```js
+const allowedOrigins = ['https://your-user-name.github.io', 'http://127.0.0.1:5500'];
+app.use(cors({
+  origin: allowedOrigins
+}));
+```
+
+Replace 'your-user-name' with your actual GitHub username. This allows both your GitHub Pages site and local development environment to access the API.
+
+### 5. Run the server locally
+
+To start the Express server locally, run:
+
+```bash
+node api/server.js
+```
+
+The server will run at `http://localhost:3000`.
+
+### 6. Access the application
+
+- **Frontend**: Open your browser and access your page hosted on GitHub Pages.
+- **Backend API**: You can test the endpoint directly in your browser:
+
+```
+http://localhost:3000/api/dollar-rate
+```
+
+### 7. Deploy to Vercel
+
+If you want to deploy the application to Vercel, make sure you have the Vercel CLI installed, then run:
+
+```bash
+vercel --prod
+```
+
+*This will deploy your application using the configuration in vercel.json.*
+
+**Your application should now be running both locally and in production. 🚀**
 
 ## How to use the app
 
