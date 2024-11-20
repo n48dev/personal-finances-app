@@ -30,37 +30,6 @@ async function getDollarToCopRate() {
     }
 }
 
-/* Cargar la Credit card purchase calculator */
-document.getElementById("creditCardPurchaseCalculator").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const creditCardPurchaseAmount = parseFloat(document.getElementById("creditCardPurchaseAmount").value);
-    const creditCardPurchaseNumInstallments = parseInt(document.getElementById("creditCardPurchaseNumInstallments").value);
-    const creditCardPurchaseInterestRatePercent = parseFloat(document.getElementById("creditCardPurchaseInterestRatePercent").value) || 27.90;
-
-    creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent);
-});
-
-/* Credit card purchase calculator math */
-function creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent) {
-    const annualInterestRate = creditCardPurchaseInterestRatePercent / 100;
-    const monthlyInterestRate = ((1 + annualInterestRate) ** (1 / 12)) - 1;
-    const monthlyPayment = creditCardPurchaseAmount * ((monthlyInterestRate * ((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments)) / (((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments) - 1));
-
-    const creditCardPurchaseResultHTML = `
-    <p>Monthly interest: ${(monthlyInterestRate * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%</p>
-    <p>Total interest: ${((monthlyPayment * creditCardPurchaseNumInstallments) - creditCardPurchaseAmount).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
-    <p>${creditCardPurchaseNumInstallments} installments of: ${monthlyPayment.toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
-    <p>Total to pay: ${(monthlyPayment * creditCardPurchaseNumInstallments).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
-`;
-
-    document.getElementById("creditCardPurchaseResult").innerHTML = creditCardPurchaseResultHTML;
-}
-
-/* USD to COP calculator */
-
-
-
 /* Mostrar Exchange rate today value y recurring payments */
 async function recurringPayments() {
     USDtoCOP = await getDollarToCopRate();
@@ -73,7 +42,6 @@ async function recurringPayments() {
     const rent = 1200000;
     const averageServices = 200000;
     const healthAndPension = 350000;
-    
     const internet = 130000;
     const mobilePlan = 50000;
     const creditCardFee = 20000;
@@ -124,3 +92,72 @@ async function recurringPayments() {
 }
 
 window.addEventListener('DOMContentLoaded', recurringPayments);
+
+/* Exchange rate calculator */
+document.getElementById("exchangeRateCalculator").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const exchangeRateCalculatorCurrency = document.getElementById("exchangeRateCalculatorCurrency").value;
+    const exchangeRateCalculatorAmount = parseFloat(document.getElementById("exchangeRateCalculatorAmount").value);
+
+    exchangeRateCalculator(exchangeRateCalculatorCurrency, exchangeRateCalculatorAmount);
+});
+
+/* Exchange rate calculator math */
+function exchangeRateCalculator(exchangeRateCalculatorCurrency, exchangeRateCalculatorAmount) {
+    let exchangeRateCalculatorResult;
+    let exchangeRateCalculatorCounterCurrency;
+
+    if (exchangeRateCalculatorCurrency === "USD") {
+        exchangeRateCalculatorResult = exchangeRateCalculatorAmount * USDtoCOP;
+        exchangeRateCalculatorCounterCurrency = "COP";
+    } else if (exchangeRateCalculatorCurrency === "COP") {
+        exchangeRateCalculatorResult = exchangeRateCalculatorAmount / USDtoCOP;
+        exchangeRateCalculatorCounterCurrency = "USD";
+    }
+
+    exchangeRateCalculatorResultHTML = `
+    <p>${exchangeRateCalculatorCurrency} ${exchangeRateCalculatorAmount.toLocaleString("en-US", {maximumFractionDigits: 2})} = ${exchangeRateCalculatorCounterCurrency} ${exchangeRateCalculatorResult.toLocaleString("en-US", {maximumFractionDigits: 2})}</p>
+    `
+
+    document.getElementById("exchangeRateCalculatorResult").innerHTML = exchangeRateCalculatorResultHTML;
+}
+
+/* Exchange rate calculator submit button config */
+exchangeRateCalculatorSelection = document.getElementById("exchangeRateCalculatorCurrency");
+exchangeRateCalculatorButton = document.getElementById("exchangeRateCalculatorButton");
+
+exchangeRateCalculatorSelection.addEventListener("change", function () {
+    if (exchangeRateCalculatorSelection.value === "USD") {
+        exchangeRateCalculatorButton.textContent = "Convert to COP";
+    } else if (exchangeRateCalculatorSelection.value === "COP") {
+        exchangeRateCalculatorButton.textContent = "Convert to USD";
+    }
+});
+
+/* Credit card purchase calculator */
+document.getElementById("creditCardPurchaseCalculator").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const creditCardPurchaseAmount = parseFloat(document.getElementById("creditCardPurchaseAmount").value);
+    const creditCardPurchaseNumInstallments = parseInt(document.getElementById("creditCardPurchaseNumInstallments").value);
+    const creditCardPurchaseInterestRatePercent = parseFloat(document.getElementById("creditCardPurchaseInterestRatePercent").value) || 27.90;
+
+    creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent);
+});
+
+/* Credit card purchase calculator math */
+function creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent) {
+    const annualInterestRate = creditCardPurchaseInterestRatePercent / 100;
+    const monthlyInterestRate = ((1 + annualInterestRate) ** (1 / 12)) - 1;
+    const monthlyPayment = creditCardPurchaseAmount * ((monthlyInterestRate * ((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments)) / (((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments) - 1));
+
+    const creditCardPurchaseResultHTML = `
+    <p>Monthly interest: ${(monthlyInterestRate * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%</p>
+    <p>Total interest: ${((monthlyPayment * creditCardPurchaseNumInstallments) - creditCardPurchaseAmount).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    <p>${creditCardPurchaseNumInstallments} installments of: ${monthlyPayment.toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    <p>Total to pay: ${(monthlyPayment * creditCardPurchaseNumInstallments).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    `;
+
+    document.getElementById("creditCardPurchaseResult").innerHTML = creditCardPurchaseResultHTML;
+}

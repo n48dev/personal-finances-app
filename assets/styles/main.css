@@ -97,8 +97,12 @@ fieldset > legend {
 
 #secondColumn {
     grid-area: secondColumn;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
+#exchangeRateCalculator > fieldset,
 #creditCardPurchaseCalculator > fieldset {
     display: flex;
     flex-direction: column;
@@ -106,25 +110,39 @@ fieldset > legend {
     gap: 6px;
 }
 
+#exchangeRateCalculator > fieldset > *,
 #creditCardPurchaseCalculator > fieldset > * {
     margin: 0px 12px;
 }
 
+#exchangeRateCalculator > fieldset > label,
 #creditCardPurchaseCalculator > fieldset > label {
     font-size: 0.95rem;
     margin-top: 4px;
 }
 
+#exchangeRateCalculator > fieldset > label:nth-child(2),
 #creditCardPurchaseCalculator > fieldset > label:nth-child(2) {
     margin-top: 16px;
 }
 
+#exchangeRateCalculator > fieldset > input,
 #creditCardPurchaseCalculator > fieldset > input {
     padding: 6px;
     border: 0.5px solid var(--primary-border-color);
     border-radius: 4px;
 }
 
+#exchangeRateCalculator > fieldset > select,
+#creditCardPurchaseCalculator > fieldset > select {
+    font-size: 0.7rem;
+    padding: 4.2px;
+    border: 0.5px solid var(--primary-border-color);
+    border-radius: 4px;
+    height: 27px;
+}
+
+#exchangeRateCalculator > fieldset > button,
 #creditCardPurchaseCalculator > fieldset > button {
     align-self: center;
     margin-top: 12px;
@@ -138,9 +156,22 @@ fieldset > legend {
     transition: transform 50ms ease-in-out, box-shadow 50ms ease-out;
 }
 
+#exchangeRateCalculator > fieldset > button:active,
 #creditCardPurchaseCalculator > fieldset > button:active {
     transform: scale(0.98);
     box-shadow: 0 0 1px;
+}
+
+#exchangeRateCalculator > fieldset > div {
+    justify-items: center;
+    font-size: 14px;
+    text-align: center;
+    margin: 4px 16px 6px;
+}
+
+#exchangeRateCalculator >fieldset > div > p {
+    font-size: 0.95rem;
+    overflow: hidden;
 }
 
 #creditCardPurchaseCalculator > fieldset > div {
@@ -149,7 +180,7 @@ fieldset > legend {
     justify-items: center;
     font-size: 14px;
     text-align: center;
-    margin: 4px 16px 8px;
+    margin: 4px 16px 6px;
 }
 
 #creditCardPurchaseCalculator >fieldset > div > p {
