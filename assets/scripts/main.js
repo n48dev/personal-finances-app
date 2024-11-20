@@ -34,28 +34,32 @@ async function getDollarToCopRate() {
 document.getElementById("creditCardPurchaseCalculator").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const amount = parseFloat(document.getElementById("amount").value);
-    const numInstallments = parseInt(document.getElementById("numInstallments").value);
-    const annualInterestRatePercent = parseFloat(document.getElementById("annualInterestRatePercent").value) || 27.90;
+    const creditCardPurchaseAmount = parseFloat(document.getElementById("creditCardPurchaseAmount").value);
+    const creditCardPurchaseNumInstallments = parseInt(document.getElementById("creditCardPurchaseNumInstallments").value);
+    const creditCardPurchaseInterestRatePercent = parseFloat(document.getElementById("creditCardPurchaseInterestRatePercent").value) || 27.90;
 
-    creditCardPurchaseCalculator(amount, numInstallments, annualInterestRatePercent);
+    creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent);
 });
 
 /* Credit card purchase calculator math */
-function creditCardPurchaseCalculator(amount, numInstallments, annualInterestRatePercent) {
-    const annualInterestRate = annualInterestRatePercent / 100;
+function creditCardPurchaseCalculator(creditCardPurchaseAmount, creditCardPurchaseNumInstallments, creditCardPurchaseInterestRatePercent) {
+    const annualInterestRate = creditCardPurchaseInterestRatePercent / 100;
     const monthlyInterestRate = ((1 + annualInterestRate) ** (1 / 12)) - 1;
-    const monthlyPayment = amount * ((monthlyInterestRate * ((1 + monthlyInterestRate) ** numInstallments)) / (((1 + monthlyInterestRate) ** numInstallments) - 1));
+    const monthlyPayment = creditCardPurchaseAmount * ((monthlyInterestRate * ((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments)) / (((1 + monthlyInterestRate) ** creditCardPurchaseNumInstallments) - 1));
 
     const creditCardPurchaseResultHTML = `
     <p>Monthly interest: ${(monthlyInterestRate * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%</p>
-    <p>Total interest: ${((monthlyPayment * numInstallments) - amount).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
-    <p>${numInstallments} installments of: ${monthlyPayment.toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
-    <p>Total to pay: ${(monthlyPayment * numInstallments).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    <p>Total interest: ${((monthlyPayment * creditCardPurchaseNumInstallments) - creditCardPurchaseAmount).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    <p>${creditCardPurchaseNumInstallments} installments of: ${monthlyPayment.toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
+    <p>Total to pay: ${(monthlyPayment * creditCardPurchaseNumInstallments).toLocaleString("en-US", { maximumFractionDigits: 0 })}</p>
 `;
 
     document.getElementById("creditCardPurchaseResult").innerHTML = creditCardPurchaseResultHTML;
 }
+
+/* USD to COP calculator */
+
+
 
 /* Mostrar Exchange rate today value y recurring payments */
 async function recurringPayments() {
@@ -101,7 +105,7 @@ async function recurringPayments() {
     <h3>Monthly expenses</h3>
     <p>COP = ${totalMonthlyCOP.toLocaleString("en-US", {maximumFractionDigits: 0 })}</p>
     <p>USD = $ ${totalMonthlyUSD.toLocaleString("en-US", {maximumFractionDigits: 2 })}</p>
-    <h3>Subscriptions</h3>
+    <h3>Monthly expenses in subscriptions</h3>
     <p>COP = ${totalSubscriptionsCOP.toLocaleString("en-US", {maximumFractionDigits: 0 })}</p>
     <p>USD = $ ${totalSubscriptionsUSD.toLocaleString("en-US", {maximumFractionDigits: 2 })}</p>
     <h3>List in COP</h3>

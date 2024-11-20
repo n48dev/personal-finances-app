@@ -24,7 +24,7 @@ See the LICENSE file in the root of this project for details. -->
     <main>
         <div id="container">
 
-            <section id="recurringPaymentsList">
+            <section id="firstColumn">
                 <fieldset>
                     <legend>Exchange rate today</legend>
 
@@ -38,24 +38,41 @@ See the LICENSE file in the root of this project for details. -->
                 </fieldset>
             </section>
 
-            <form id="creditCardPurchaseCalculator">
-                <fieldset>
-                    <legend>Credit card purchase calculator</legend>
-                    
-                    <label for="amount">Purchase amount*</label>
-                    <input id="amount" type="number" placeholder="e.g., 2360000" required>
-                    
-                    <label for="numInstallments">Number of installments*</label>
-                    <input id="numInstallments" type="number" placeholder="e.g., 6" required>
-                    
-                    <label for="annualInterestRatePercent">Annual interest rate (E.A.)</label>
-                    <input id="annualInterestRatePercent" type="number" placeholder="Default: 27.90" step="0.01">
-                    
-                    <button type="submit">Submit</button>
-                    
-                    <div id="creditCardPurchaseResult"></div>
-                </fieldset>
-            </form>
+            <section id="secondColumn">
+                <form id="exchangeRateCalculator">
+                    <fieldset>
+                        <legend>Exchange rate calculator</legend>
+
+                        <label for="exchangeRateCalculatorCurrency">Currency</label>
+                        <select id="exchangeRateCalculatorCurrency">
+                            <option value="USD">USD</option>
+                            <option value="COP">COP</option>
+                        </select>
+
+                        <label for="exchangeRateCalculatorAmount">Amount</label>
+                        <input id="exchangeRateCalculatorAmount" type="number" placeholder="e.g., 4,99" required>
+                    </fieldset>
+                </form>
+
+                <form id="creditCardPurchaseCalculator">
+                    <fieldset>
+                        <legend>Credit card purchase calculator</legend>
+                        
+                        <label for="creditCardPurchaseAmount">Purchase amount*</label>
+                        <input id="creditCardPurchaseAmount" type="number" placeholder="e.g., 2360000" required>
+                        
+                        <label for="creditCardPurchaseNumInstallments">Number of installments*</label>
+                        <input id="creditCardPurchaseNumInstallments" type="number" placeholder="e.g., 6" required>
+                        
+                        <label for="creditCardPurchaseInterestRatePercent">Annual interest rate (E.A.)</label>
+                        <input id="creditCardPurchaseInterestRatePercent" type="number" placeholder="Default: 27.90" step="0.01">
+                        
+                        <button type="submit">Submit</button>
+                        
+                        <div id="creditCardPurchaseResult"></div>
+                    </fieldset>
+                </form>
+            </section>
         </div>
     </main>
     <script src="assets/scripts/main.js"></script>

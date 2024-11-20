@@ -24,12 +24,12 @@ body {
 
 #container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas: 
-    "recurringPaymentsList creditCardPurchaseCalculator";
+    "firstColumn secondColumn";
     gap: 24px;
     margin: auto;
-    max-width: 1920px;
+    max-width: 900px;
 }
 
 input {
@@ -56,8 +56,8 @@ fieldset > legend {
     box-shadow: 0 0 6px var(--shadow--color);
 }
 
-#recurringPaymentsList {
-    grid-area: recurringPaymentsList;
+#firstColumn {
+    grid-area: firstColumn;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -95,8 +95,8 @@ fieldset > legend {
     background-color: var(--primary-semitransparent);
 }
 
-#creditCardPurchaseCalculator {
-    grid-area: creditCardPurchaseCalculator;
+#secondColumn {
+    grid-area: secondColumn;
 }
 
 #creditCardPurchaseCalculator > fieldset {
@@ -155,4 +155,17 @@ fieldset > legend {
 #creditCardPurchaseCalculator >fieldset > div > p {
     width: 130px;
     overflow: hidden;
+}
+
+@media (max-width: 940px) {
+    #container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: 
+        "firstColumn"
+        "secondColumn";
+        gap: 24px;
+        margin: auto;
+        max-width: 450px;
+    }
 }
