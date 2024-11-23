@@ -149,7 +149,6 @@ vercel --prod
 ## Future enhancements
 
 - 💾 **Data persistence**: Save expense data in localStorage to prevent loss of information.
-- 📱 **Responsive design**: Adapt the interface for mobile devices.
 - 📊 **Charts**: Include visual charts for better insight into expenses and savings.
 - 🔒 **Authentication**: Add a basic user system so that each person can manage their own financial data.
 

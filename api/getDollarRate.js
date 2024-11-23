@@ -34,7 +34,7 @@ const getDollarRate = async () => {
     const lastFetched = await redisClient.get('usd_cop_last_fetched');
     const now = Date.now();
 
-    if (cachedData && lastFetched && (now - lastFetched) < 24 * 60 * 60 * 1000) {
+    if (cachedData && lastFetched && (now - lastFetched) < 6 * 60 * 60 * 1000) {
       return parseFloat(cachedData);
     }
 

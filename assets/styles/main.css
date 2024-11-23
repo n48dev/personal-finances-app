@@ -195,7 +195,7 @@ fieldset > legend {
         grid-template-areas: 
         "firstColumn"
         "secondColumn";
-        gap: 24px;
+        gap: 12px;
         margin: auto;
         max-width: 450px;
     }
