@@ -11,7 +11,7 @@ const getDollarRate = require('./getDollarRate');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const allowedOrigins = ['https://n48dev.github.io', 'http://127.0.0.1:5500'];
+const allowedOrigins = ['https://finances.n48.dev', 'http://127.0.0.1:5500'];
 app.use(cors({
   origin: allowedOrigins
 }));
